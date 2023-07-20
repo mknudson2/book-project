@@ -1,0 +1,32 @@
+{% extends "base.jinja" %} {#at top b/c this is the whole page, that is, include everything from base.jinja here.#}
+
+{% block content %} {#matches with base.jinja to signal unique content respective to the page.#}
+
+<h3>Sign Up</h3>
+{{ form.hidden_tag() }}
+<p>
+    {{ form.first_name.label }}<br>
+    {{form.first_name(size=45)}}
+</p>
+<p>
+    {{ form.last_name.label }}<br>
+    {{form.last_name(size=45)}}
+</p>
+<p>
+    {{ form.username.label }}<br>
+    {{form.username(size=45)}}
+</p>
+<p>
+    {{ form.email.label }}<br>
+    {{form.email(size=45)}}
+</p>
+<p>
+    {{ form.password.label }}<br>
+    {{form.password(size=45)}}
+</p>
+<p>
+    {{ form.verify_password.label }}<br>
+    {{form.verify_password(size=45)}}
+</p>
+<p>{{ form.submit }}</p>
+{% endblock content %}

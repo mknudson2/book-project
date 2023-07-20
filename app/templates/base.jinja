@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% if title %}
+        {{ title }}
+        {% else %}
+        Book Project
+        {% endif %}
+    </title>
+</head>
+<body>
+    <nav></nav>
+    <h1>Book Project</h1>
+    
+    {% block content %} 
+    
+    {% endblock content %}
+</body>
+</html>
