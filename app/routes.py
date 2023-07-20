@@ -3,7 +3,7 @@ from app import app #connects with instance of app in the __init__file of the ap
 from app.forms import LoginForm, RegisterForm
 
 
-@app.route('/') #decorator that wraps a function and points to a specifc url. It says apply this function when going to this endpoint (Url).
+@app.route('/') #decorator that wraps a function and points to a specifc url. It says apply this function when going to this endpoint (URL).
 def home(): #viewer function (i.e., determines what will be viewed at the given url endpoint)
     author_posts = {
         'author': {
@@ -12,7 +12,6 @@ def home(): #viewer function (i.e., determines what will be viewed at the given 
         },
         'students': {student:[f'Yay! More books from Mike! We loved Raymond and Graham!'] for student in ['Mark', 'Kimmy', 'Steve', "Karin"]}
     }
-    
     return render_template('index.jinja', authors=author_posts['author'], students=author_posts['students'], title='Homepage')
 
 
@@ -27,3 +26,8 @@ def sign_in():
 def sign_up():
     register_form = RegisterForm()
     return render_template('register.jinja', title="Sign Up", form = register_form)
+
+
+@app.route('/collections_books')
+def collections_books():
+    return render_template('collections_books.jinja', title="Books")
