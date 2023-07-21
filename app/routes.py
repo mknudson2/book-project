@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, flash, redirect
 from app import app #connects with instance of app in the __init__file of the app folder
 from app.forms import LoginForm, RegisterForm
 
@@ -16,15 +16,23 @@ def home(): #viewer function (i.e., determines what will be viewed at the given 
 
 
 
-@app.route('/signin')
+@app.route('/signin', methods=["GET", "POST"])
 def sign_in():
     login_form = LoginForm() #creating an instance of the imported class
+    if login_form.validate_on_submit():
+        flash(f'{login_form.email.data} has logged in!', category='success')
+        return redirect('/')
     return render_template('signin.jinja', title='Sign In', form = login_form)
 
 
-@app.route('/register')
+@app.route('/register', methods=["GET", "POST"])
 def sign_up():
     register_form = RegisterForm()
+    if register_form.validate_on_submit():
+        first_name = register_form.first_name.data
+        username = register_form.username.data
+        flash(f'{first_name if first_name else username} has registered!', category='success')
+        return redirect('/')
     return render_template('register.jinja', title="Sign Up", form = register_form)
 
 

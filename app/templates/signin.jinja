@@ -3,19 +3,26 @@
 {% block content %}
 
 
-<h3>Sign In</h3>
-{{ form.hidden_tag() }} {#IMPORTANT! Don't forget this!#}
-<p>
-    {{ form.email.label }}<br>
-    {{ form.email(size=32) }}
-</p>
-<p>
-    {{ form.password.label }}<br>
-    {{ form.password(size=32) }}
-</p>
-<p>
-    {{ form.remember_me }} {{ form.remember_me.label }}
-</p>
-<p>{{ form.submit }}</p>
-
+    <h3>Sign In</h3>
+    <form action="" method="POST" novalidate>
+        {{ form.hidden_tag() }} {#IMPORTANT! Don't forget this!#}
+        <p>
+            {{ form.email.label }}<br>
+            {{ form.email(size=32) }}
+            {% for error in form.email.errors %}
+                <span> {{ error }} </span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}
+            {% for error in form.password.errors %}
+                <span> {{ error }} </span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.remember_me }} {{ form.remember_me.label }}
+        </p>
+        <p>{{ form.submit }}</p>
+    </form>
 {% endblock content %}

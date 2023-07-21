@@ -117,3 +117,8 @@ Import Config to __init__ file
 
 On the __init__ page, after the instantiation of app as an object of Flask, write the follwing code to allow configurations to come through our config file for the app/website
     --> app.config.from_object(Config)
+
+
+    validate_on_submit() checks two things
+        1. that it is a POST request. If not, such as being a GET request, it will short circut and go to the return statement.
+        2. It will check that any validators that have been attached to the form are being met.
