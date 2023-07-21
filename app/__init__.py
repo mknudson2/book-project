@@ -11,4 +11,4 @@ migrate = Migrate(app, db)
 
 
 #must be at bottom of page to avoid circular import
-from app import routes
+from app import routes, models
