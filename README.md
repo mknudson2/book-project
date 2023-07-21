@@ -122,3 +122,12 @@ On the __init__ page, after the instantiation of app as an object of Flask, writ
     validate_on_submit() checks two things
         1. that it is a POST request. If not, such as being a GET request, it will short circut and go to the return statement.
         2. It will check that any validators that have been attached to the form are being met.
+
+Create a models.py in the app folder. This is where we will create tables for our database with each attribute being a row on the table.
+    --be sure to import your database at the top of the file.
+
+
+    --> class User(db.Model):
+            user_id = db.Column(db.Integer)
+        --or--
+            PrimaryKey = db.InstanceOfAColumn(db.DataType)
