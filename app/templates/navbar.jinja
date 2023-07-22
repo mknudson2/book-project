@@ -1,13 +1,18 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Book Project</a>
+    <a class="navbar-brand" href="{{ url_for('main.home') }}">Book Project</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      {% if current_user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/for_kids">For Kids</a>
+          <a class="nav-link active" aria-current="page" href="{{ url_for('social.profile', username=current_user.username)}}">My Page</a>
+        </li>
+      {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/for_kids">For Kids</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/for_parents">For Parents</a>
@@ -27,11 +32,20 @@
           </ul>
         </li>
       </ul>
-      <a class="btn btn-outline-success" type="submit" href="/signin">Sign In</a>
-      <a class="btn btn-outline-success" type="button" href="/register">Register</a>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+      {% if current_user.is_authenticated %}
+        <a class="btn btn-outline-danger" type="button" href="{{ url_for('auth.logout') }}">Logout</a>
+      {% else %}
+        <a class="btn btn-outline-primary" type="submit" href="{{ url_for('auth.sign_in') }}">Sign In</a>
+        <a class="btn btn-outline-primary" type="button" href="{{ url_for('auth.sign_up') }}">Register</a>
+      {% endif  %}
+      {# <a class="btn btn-outline-success" type="submit" href="/sign_in">Sign In</a>
+      <a class="btn btn-outline-success" type="button" href="/register">Register</a> #}
+      <form class="d-flex" role="search" method="POST" action="{{url_for('social.user_search')}}">
+        {{ g.search_form.hidden_tag() }}
+        {{ g.search_form.username() }}
+        {{ g.search_form.submit() }}
+        {# <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <a class="btn btn-outline-success" type="button" href="{{url_for('social.user_search')}}">Search</a> #}
       </form>
     </div>
   </div>
