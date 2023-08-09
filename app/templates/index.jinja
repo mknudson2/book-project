@@ -3,10 +3,10 @@
 {% block content %}
 
 
-    <p>Mike says: {{authors.Mike[0]}}</p>
-    <p>Brandon replied: {{authors.Brandon[0]}}</p>
+    <p>Haraldur segir: {{authors.Haraldur[0]}}</p>
+    <p>Bragi svarar: {{authors.Bragi[0]}}</p>
     {% for student in students %}
-        <p>{{student.title()}} says: {{ students[student][0] }}</p>
+        <p>{{student.title()}} segir: {{ students[student][0] }}</p>
     {% endfor %}
 
 {% endblock content %}
