@@ -20,9 +20,9 @@ class RegisterForm(FlaskForm):
     #Could we add a drop down or something that would allow them to sign up with a role as well? Such as Student, Parent, Teacher, Media Specialist, Administrator, etc.?
 
 class PostForm(FlaskForm):
-    body = StringField('Make Post', validators=[DataRequired()])
+    body = StringField('Make Post', validators=[ DataRequired() ])
     submit = SubmitField('Post')
 
 class UserSearchForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
+    username = StringField('Username', validators=[ DataRequired() ])
     submit = SubmitField('Search User')

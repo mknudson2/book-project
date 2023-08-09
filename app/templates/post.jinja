@@ -1,6 +1,6 @@
 
-    <form action="{{ url_for('social.post') }}" method="POST">
-        {{ g.post_form.hidden_tag() }}
-        <span>{{g.post_form.body()}}</span>
-        <p> {{g.post_form.submit()}} </p>
-    </form>
+  <form action="{{ url_for('social.post') }}" method="POST">
+    {{ g.post_form.hidden_tag() }}
+    <span>{{ g.post_form.body() }}</span>
+    <p>{{ g.post_form.submit() }}</p>
+  </form>

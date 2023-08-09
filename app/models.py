@@ -14,12 +14,23 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(150), nullable=False, unique=True)
     email = db.Column(db.String(150), nullable=False, unique=True)
     password_hash = db.Column(db.String(), nullable=False)
-    posts = db.relationship('Post', backref="owner", lazy=True)
-
+    posts = db.relationship('Post', backref = 'author', lazy=True)
     
     def __repr__(self):
         return f'<USER: {self.username}>'
-    
+
+    def to_dict(self):
+        return {
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email,
+            'username': self.username,
+            'posts': [{
+                'body': post.body,
+                'timestamp': post.timestamp
+            } for post in self.posts]
+        }
+     
     def commit(self):
         db.session.add(self)
         db.session.commit()
@@ -48,4 +59,8 @@ class Post(db.Model):
     
     def commit(self):
         db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delele(self)
         db.session.commit()

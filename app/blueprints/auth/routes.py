@@ -1,12 +1,16 @@
 from flask import flash, redirect, render_template, url_for
-from flask_login import login_user, logout_user, current_user 
+from flask_login import login_user, logout_user, current_user, login_required
 
 from . import bp as auth
 from app.forms import LoginForm, RegisterForm
 from app.models import User
 
+
+
 @auth.route('/signin', methods=["GET", "POST"])
 def sign_in():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.home'))
     login_form = LoginForm() #creating an instance of the imported class
     if login_form.validate_on_submit():
         email = login_form.email.data
@@ -16,17 +20,20 @@ def sign_in():
             flash(f'{login_form.email.data} has logged in!', category='success')
             return redirect(url_for('main.home'))
         else:
-            flash('Invalid use data. Please try again.', category='warning')
-    return render_template('signin.jinja', title='Sign In', form = login_form)
+            flash('Invalid user data. Please try again.', category='warning')
+    return render_template('signin.jinja', title='Sign In', form = login_form ) #How we then access our form on the page/template
 
 
 @auth.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('auth.sign_in'))
 
 @auth.route('/register', methods=["GET", "POST"])
 def sign_up():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.home'))
     register_form = RegisterForm()
     if register_form.validate_on_submit():
         user_info = { 
