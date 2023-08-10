@@ -15,6 +15,7 @@
     <div class="add-to-collection-form"></div>
         <h3>Add to Collection</h3>
             <form action="{{ url_for('social.collection_add') }}" method="POST">
+            {{ form.hidden_tag() }}
                 <div>
                     {{form.book_title.label}}<br>
                     {{form.book_title(size=50)}}
@@ -35,9 +36,9 @@
                     {{form.description.label}}<br>
                     {{form.description(size=50)}}
                 </div>
-                <div>
-                    {{form.type.label}}<br>
-                    {{form.type(size=50)}}
+                <div class="form_group">
+                    {{ form.type.label(class="form-control-label") }}<br>
+                    {{ form.type(class="form-control") }}
                 </div>
                 <div>
                     {{ form.submit() }}

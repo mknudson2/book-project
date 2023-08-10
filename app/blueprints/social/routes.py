@@ -25,8 +25,10 @@ def profile(username):
     user = User.query.filter_by(username = username).first()
     if user:
         posts = user.posts
-        print(user.posts)
-        return render_template('profile.jinja', username = username, posts = posts)
+        collections = user.collection
+        # print(collections)
+        # print(collections[0].book_title)
+        return render_template('profile.jinja', username = username, posts = posts, collections = collections)
     else:
         flash(f'User: {username} is not a valid user',category='alert')
         return redirect(url_for('main.home'))

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
 from wtforms.validators import DataRequired, EqualTo
 
 
@@ -32,5 +32,5 @@ class CollectionForm(FlaskForm):
     year_published = StringField('Year Published', validators=[DataRequired()])
     language = StringField('Language', validators=[DataRequired()])
     description = StringField('Description', validators=[DataRequired()])
-    type = StringField('Type', validators=[DataRequired()])
+    type = SelectField('Type', choices=[('primary', 'Primary Text'), ('resource', 'Resource'), ('grammar', 'Grammar')], validators=[DataRequired()])
     submit = SubmitField('Add')

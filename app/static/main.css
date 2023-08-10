@@ -15,3 +15,17 @@
 .add-to-collection-form {
     flex-basis: 30%; /* Set a fixed width for the form block */
 }
+
+.profile_body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-collections {
+  max-width: 40%;
+}
+
+.book_title {
+  font-size: 28px;
+  font-weight: 800;
+}

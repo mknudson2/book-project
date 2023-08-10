@@ -15,7 +15,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(150), nullable=False, unique=True)
     password_hash = db.Column(db.String(), nullable=False)
     posts = db.relationship('Post', backref = 'author', lazy=True)
-    collection = db.relationship('Collection', backref="poster", lazy=True)
+    collection = db.relationship('Collection', backref= 'user', lazy=True)
     
     def __repr__(self):
         return f'<USER: {self.username}>'
@@ -77,7 +77,7 @@ class Collection(db.Model):
     type = db.Column(db.String(50), nullable=False)
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable = False)
-    #If I wanted to add keywords, could I make a column that accepts a list?
+    #If I wanted to add keywords, could I make a column that accepts a list? Or just make a top three keyword with three fields?
 
     def commit(self):
         db.session.add(self)
