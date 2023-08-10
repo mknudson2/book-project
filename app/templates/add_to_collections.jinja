@@ -1,0 +1,52 @@
+{# {% extends "base.jinja" %}
+
+{% block content %}
+
+<h3>Add to Collection</h3>
+<form method="POST" novalidate>
+    {{ g.collection_form.hidden_tag() }}
+    <p>
+        {{form.book_title.label}}
+        {{form.book_title(size=80)}}
+        {% for error in form.book_title.errors %}
+        <span> {{ error }} </span>
+        {% endfor %}
+    </p>
+    <p>
+        {{form.author.label}}
+        {{form.author(size= 50)}}
+        {% for error in form.author.errors %}
+        <span> {{ error }} </span>
+        {% endfor %}
+    </p>
+    <p>
+        {{form.year_published.label}}
+        {{form.year_published(size=30)}}
+        {% for error in form.year_published.errors %}
+        <span> {{ error }} </span>
+        {% endfor %}
+    </p>
+    <p>
+        {{form.language.label}}
+        {{form.language(size=50)}}
+        {% for error in form.language.errors %}
+        <span> {{ error }} </span>
+        {% endfor %}
+    </p>
+    <p>
+        {{form.description.label}}
+        {{form.description(size=0)}}
+        {% for error in form.description.errors %}
+        <span> {{ error }} </span>
+        {% endfor %}
+    </p>
+    <p>
+        {{form.type.label}}
+        {{form.type(size=50)}}
+        {% for error in form.type.errors %}
+        <span> {{ error }} </span>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit }}</p>
+</form>
+{% endblock content %} #}

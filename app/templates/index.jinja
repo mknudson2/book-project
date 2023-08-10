@@ -2,11 +2,47 @@
 
 {% block content %}
 
+    <div class="content-wrapper">
+        <div class="main-content">
+            <p>Haraldur segir: {{ authors.Haraldur[0] }}</p>
+            <p>Bragi svarar: {{ authors.Bragi[0] }}</p>
+            {% for student in students %}
+                <p>{{ student.title() }} segir: {{ students[student][0] }}</p>
+            {% endfor %}
+        </div>
 
-    <p>Haraldur segir: {{authors.Haraldur[0]}}</p>
-    <p>Bragi svarar: {{authors.Bragi[0]}}</p>
-    {% for student in students %}
-        <p>{{student.title()}} segir: {{ students[student][0] }}</p>
-    {% endfor %}
-
+    {% if current_user.is_authenticated %}
+    <div class="add-to-collection-form"></div>
+        <h3>Add to Collection</h3>
+            <form action="{{ url_for('social.collection_add') }}" method="POST">
+                <div>
+                    {{form.book_title.label}}<br>
+                    {{form.book_title(size=50)}}
+                </div>
+                <div>
+                    {{form.author.label}}<br>
+                    {{form.author(size= 50)}}
+                </div>
+                <div>
+                    {{form.year_published.label}}<br>
+                    {{form.year_published(size=30)}}
+                </div>
+                <div>
+                    {{form.language.label}}<br>
+                    {{form.language(size=50)}}
+                </div>
+                <div>
+                    {{form.description.label}}<br>
+                    {{form.description(size=50)}}
+                </div>
+                <div>
+                    {{form.type.label}}<br>
+                    {{form.type(size=50)}}
+                </div>
+                <div>
+                    {{ form.submit() }}
+                </div>
+            </form>
+        {% endif %}
+    </div>
 {% endblock content %}

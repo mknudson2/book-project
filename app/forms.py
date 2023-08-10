@@ -25,3 +25,12 @@ class PostForm(FlaskForm):
 class UserSearchForm(FlaskForm):
     username = StringField('Username', validators=[ DataRequired() ])
     submit = SubmitField('Search User')
+
+class CollectionForm(FlaskForm):
+    book_title = StringField('Title', validators=[DataRequired()])
+    author = StringField('Author', validators=[DataRequired()])
+    year_published = StringField('Year Published', validators=[DataRequired()])
+    language = StringField('Language', validators=[DataRequired()])
+    description = StringField('Description', validators=[DataRequired()])
+    type = StringField('Type', validators=[DataRequired()])
+    submit = SubmitField('Add')

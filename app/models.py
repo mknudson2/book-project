@@ -15,6 +15,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(150), nullable=False, unique=True)
     password_hash = db.Column(db.String(), nullable=False)
     posts = db.relationship('Post', backref = 'author', lazy=True)
+    collection = db.relationship('Collection', backref="poster", lazy=True)
     
     def __repr__(self):
         return f'<USER: {self.username}>'
@@ -62,5 +63,26 @@ class Post(db.Model):
         db.session.commit()
 
     def delete(self):
-        db.session.delele(self)
+        db.session.delete(self)
+        db.session.commit()
+
+
+class Collection(db.Model):
+    collection_id = db.Column(db.Integer, primary_key=True)
+    book_title = db.Column(db.String(200), nullable=False)
+    author = db.Column(db.String(50), nullable=False)
+    year_published = db.Column(db.String(20), nullable=False)
+    language = db.Column(db.String(20), nullable=False)
+    description = db.Column(db.String(200), nullable=False)
+    type = db.Column(db.String(50), nullable=False)
+    date_added = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable = False)
+    #If I wanted to add keywords, could I make a column that accepts a list?
+
+    def commit(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
         db.session.commit()

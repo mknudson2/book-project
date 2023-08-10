@@ -1,3 +1,17 @@
 .err-msg{
     color:red;
   }
+
+.content-wrapper {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space the blocks horizontally */
+}
+
+.main-content {
+    width: 40%;
+    padding-right: 10px; 
+}
+
+.add-to-collection-form {
+    flex-basis: 30%; /* Set a fixed width for the form block */
+}

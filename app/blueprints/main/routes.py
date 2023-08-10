@@ -1,10 +1,13 @@
 from flask import render_template
+
+from app.forms import CollectionForm
 from . import bp as main
 
 
 
 @main.route('/') #decorator that wraps a function and points to a specifc url. It says apply this function when going to this endpoint (URL).
 def home(): #viewer function (i.e., determines what will be viewed at the given url endpoint)
+    collection_form = CollectionForm()
     author_posts = {
         'author': {
             'Haraldur': ['Við erum mjög glöð að bjóða alla ny bók um ritsagn Íslands!'],
@@ -12,7 +15,7 @@ def home(): #viewer function (i.e., determines what will be viewed at the given 
         },
         'students': {student:[f'Jæja! Bækur fyrir alla!'] for student in ['Svanhildur', 'Regin', 'Snæbjörn', "Helgi"]}
     }
-    return render_template('index.jinja', authors=author_posts['author'], students=author_posts['students'], title='Homepage')
+    return render_template('index.jinja', authors=author_posts['author'], students=author_posts['students'], title='Homepage', form=collection_form)
 
 
 
