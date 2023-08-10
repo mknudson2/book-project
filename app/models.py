@@ -20,8 +20,8 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return f'<USER: {self.username}>'
 
-    def to_dict(self):
-        return {
+    def to_dict(self, include_collections=False):
+        data = {
             'first_name': self.first_name,
             'last_name': self.last_name,
             'email': self.email,
@@ -31,6 +31,16 @@ class User(UserMixin, db.Model):
                 'timestamp': post.timestamp
             } for post in self.posts]
         }
+        if include_collections:
+            data['collections'] = [{
+                'book_title': collection.book_title,
+                'author': collection.author,
+                'year_published': collection.year_published,
+                'language': collection.language,
+                'description': collection.description,
+                'type': collection.type
+            } for collection in self.collections]
+        return data
      
     def commit(self):
         db.session.add(self)
