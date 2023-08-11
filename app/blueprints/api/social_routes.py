@@ -29,11 +29,30 @@ def get_user_posts(username):
     user_posts = user.posts
     return jsonify({
         'message': 'success',
-        'user': user.to_dict(include_collections=True),
         'posts': [{
             'body': post.body,
             'timestamp': post.timestamp
         } for post in user_posts ]
+        
+    })
+
+@api.get('/user-collection/<username>')
+@jwt_required()
+def get_user_collection(username):
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return jsonify({'message': 'Invalid username'}), 400
+    user_collection = user.collection
+    return jsonify({
+        'message': 'success',
+        'collections': [{
+            'book_title': collection.book_title,
+            'author': collection.author,
+            'year_published': collection.year_published,
+            'language': collection.language,
+            'description': collection.description,
+            'type': collection.type
+        } for collection in user_collection]
     })
 
 @api.delete('/delete-post/<post_id>')
@@ -52,5 +71,5 @@ def delete_post(post_id):
 def user_profile(username):
     user = User.query.filter_by(username=username).first()
     if user:
-        return jsonify(user=user.to_dict(include_collections=True))
+        return jsonify(user=user.to_dict)
     return jsonify(message='Invalid username.'), 404

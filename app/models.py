@@ -20,8 +20,8 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return f'<USER: {self.username}>'
 
-    def to_dict(self, include_collections=False):
-        data = {
+    def to_dict(self):
+        return {
             'first_name': self.first_name,
             'last_name': self.last_name,
             'email': self.email,
@@ -29,10 +29,8 @@ class User(UserMixin, db.Model):
             'posts': [{
                 'body': post.body,
                 'timestamp': post.timestamp
-            } for post in self.posts]
-        }
-        if include_collections:
-            data['collections'] = [{
+            } for post in self.posts],
+            'collections': [{
                 'book_title': collection.book_title,
                 'author': collection.author,
                 'year_published': collection.year_published,
@@ -40,7 +38,8 @@ class User(UserMixin, db.Model):
                 'description': collection.description,
                 'type': collection.type
             } for collection in self.collections]
-        return data
+        }
+
      
     def commit(self):
         db.session.add(self)
